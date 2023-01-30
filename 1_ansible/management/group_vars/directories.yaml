@@ -1,0 +1,31 @@
+directories:
+  - path: /mnt/data
+    owner: nobody
+    group: nogroup
+    mode: '0664'
+  - path: /mnt/data/gitlab
+    owner: root
+    group: root
+    mode: '0664'
+    owner: root
+    group: root
+  - path: /mnt/data/kube_data
+    mode: '0664'
+    owner: root
+    group: root
+  - path: /mnt/data/kube_data/nextcloud_postgres
+    owner: 1001
+    group: 1001
+    mode: '0755'
+  - path: /mnt/storage
+    owner: nobody
+    group: nogroup
+    mode: '0664'
+  - path: /mnt/storage/kube_data
+    owner: nobody
+    group: nogroup
+    mode: '0664'
+  - path: /mnt/storage/nextcloud
+    owner: root
+    group: root
+    mode: '0755'

@@ -1,0 +1,13 @@
+## full proxy only used to dowload cntlm
+#full_proxy: "http://CptLinuxWeb:LinuxWeb@10.33.50.30:3128"
+#
+## proxy split informations
+#proxy_ip: 10.33.50.30
+#proxy_port: 3128
+#
+## cntlm configuration file
+#proxy_username: CptLinuxWeb
+#proxy_domain: TESSI-TECHNO
+#proxy_password: LinuxWeb
+#cntlm_listen: 3128
+#NoProxy: localhost, 127.0.0.*, 10.*, 192.168.*, 172.168.*, *.interne*, *.svc*

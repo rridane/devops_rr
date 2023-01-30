@@ -1,0 +1,10 @@
+## local
+etc_hosts:
+  - ip: 10.10.10.108
+    hostname: rt.rrdev.local
+
+
+### rct_cluster
+#etc_hosts:
+#  - ip: 10.33.250.221
+#    hostname: rct-kubeapi-tessi-invoice.interne.tessi-techno.fr

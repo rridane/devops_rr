@@ -1,0 +1,51 @@
+- name: clear_file
+  file:
+    path: "/etc/apt/apt.conf.d/http-proxy.conf"
+    state: absent
+  become: yes
+
+- name: add http proxy to apt
+  lineinfile:
+    path: /etc/apt/apt.conf.d/http-proxy.conf
+    line: "Acquire::http::Proxy \"{{ http_proxy }}\";"
+    owner: root
+    group: root
+    mode: '0644'
+    create: true
+  become: yes
+
+- name: add https proxy to apt
+  lineinfile:
+    path: /etc/apt/apt.conf.d/http-proxy.conf
+    line: "Acquire::https::Proxy \"{{ http_proxy }}\";"
+    owner: root
+    group: root
+    mode: '0644'
+    create: true
+  become: yes
+
+- name: add http proxy
+  lineinfile:
+    path: /etc/environment
+    line: http_proxy="{{ http_proxy }}"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: add https proxy
+  lineinfile:
+    path: /etc/environment
+    line: https_proxy="{{ http_proxy }}"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: add https proxy to systemd
+  become: yes
+  shell: systemctl set-environment HTTP_PROXY="http://127.0.0.1:{{ cntlm_listen }}"
+
+- name: add http proxy to systemd
+  become: yes
+  shell: systemctl set-environment HTTPS_PROXY="http://127.0.0.1:{{ cntlm_listen }}"

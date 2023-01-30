@@ -1,0 +1,14 @@
+{
+  "auths": {
+    "": {
+      "auth": "AUTH_BASE64"
+    }
+  },
+  "proxies": {
+    "default": {
+      "httpProxy": "HTTP_PROXY",
+      "httpsProxy": "HTTPS_PROXY",
+      "noProxy": ""
+    }
+  }
+}

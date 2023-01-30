@@ -1,0 +1,14 @@
+metrics:
+  prometheus:
+    entryPoint: metrics
+    ## Enable metrics on entry points. Default=true
+    addEntryPointsLabels: true
+    ## Enable metrics on routers. Default=false
+    addRoutersLabels: true
+    ## Enable metrics on services. Default=true
+    addServicesLabels: true
+service:
+  type: NodePort
+logs:
+  general:
+    level: DEBUG

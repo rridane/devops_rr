@@ -1,0 +1,6 @@
+- name: Add etc hosts on all hosts
+  hosts: all
+  vars_files:
+    - group_vars/etc_hosts_vars.yaml
+  roles:
+    - system-configure-etc-hosts

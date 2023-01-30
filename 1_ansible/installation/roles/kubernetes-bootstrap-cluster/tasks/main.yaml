@@ -1,0 +1,33 @@
+- name: copy kubeadm conf
+  template:
+    src: templates/kubeadm.yaml
+    dest: /tmp/kubeadm.yaml
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  run_once: yes
+  when: clean_kube is defined
+
+- name: init master
+  become: yes
+  shell: kubeadm init --config /tmp/kubeadm.yaml
+  run_once: yes
+  when: clean_kube is defined
+
+- name: create .kube config dir
+  file:
+    path: ~/.kube
+    state: directory
+    mode: '0644'
+  become: yes
+  when: clean_kube is defined
+
+- name: copy kubeconfig file
+  copy:
+    src: /etc/kubernetes/admin.conf
+    remote_src: yes
+    dest: ~/.kube/config
+    mode: '0644'
+  become: yes
+  when: clean_kube is defined

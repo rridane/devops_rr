@@ -1,0 +1,31 @@
+- name: install containerd
+  hosts:
+    - workers
+    - masters
+  vars_files:
+    - group_vars/containerd_vars.yaml
+  roles:
+    - system-install-containerd
+
+- name: install kubernetes packages
+  hosts:
+    - workers
+    - masters
+  vars_files:
+    - group_vars/kube_vars.yaml
+  roles:
+    - system-install-kube-packages
+
+- name: Configure network rules
+  hosts:
+    - workers
+    - masters
+  roles:
+    - system-configure-kube-network-rules
+
+- name: Disable swap
+  hosts:
+    - workers
+    - masters
+  roles:
+    - system-configure-swap

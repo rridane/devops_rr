@@ -1,0 +1,6 @@
+kube_version: 1.26.0-00
+certSANs:
+  - 10.10.10.108
+  - rt.rrdev.local
+  - 127.0.0.1
+controlPlaneEndpoint: rt.rrdev.local

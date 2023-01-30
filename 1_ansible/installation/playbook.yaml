@@ -1,0 +1,14 @@
+- import_playbook: system_configure_etc_hosts.yaml
+  tags: configure_etc_hosts
+#- import_playbook: system_configure_proxy_playbook.yaml
+#  tags: configure_proxy
+- import_playbook: system_configure_haproxy_playbook.yaml
+  tags: configure_lbs
+- import_playbook: system_install_kube_tools_playbook.yaml
+  tags: install_kube_tools
+- import_playbook: kube_bootstrap_cluster_playbook.yaml
+  tags: bootstrap_cluster
+- import_playbook: kube_configure_nodes_playbook.yaml
+  tags: add_nodes
+- import_playbook: system_install_nfs_server.yaml
+  tags: install_nfs

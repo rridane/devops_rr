@@ -1,0 +1,47 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+
+#-----------------------------------------------------------------------------------------
+# Stages
+#-----------------------------------------------------------------------------------------
+
+stages:
+  - package_and_push
+  - deploy
+
+#-----------------------------------------------------------------------------------------
+# Before each script
+#-----------------------------------------------------------------------------------------
+
+before_script:
+  - source ./ci/bash_shell/kubernetes/kubernetes.bash
+  - source ./ci/bash_shell/docker_kaniko/kaniko.bash
+  - env__define_environment_variables
+
+#-----------------------------------------------------------------------------------------
+# Job 3 : Build apps with kaniko and push to Nexus
+#-----------------------------------------------------------------------------------------
+
+👷 kaniko:build:
+  stage: package_and_push
+  <<: *default_runners
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - kaniko__init_config
+    - kaniko__build_and_push_docker_images
+
+#-----------------------------------------------------------------------------------------
+# Job 4 : Deploy to cluster
+#-----------------------------------------------------------------------------------------
+
+🛫 kubernetes:deploy:
+  image: bitnami/kubectl:1.25
+  stage: deploy
+  tags:
+    - "cluster_admin"
+  script:
+    - kubernetes__init_kube_config
+    - kubernetes__deploy_pod

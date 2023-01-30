@@ -1,0 +1,76 @@
+#---
+# local
+# virtual ip for keepalived
+ha_vip: "10.10.10.108"
+# interface to plugin on loadbalancers
+keepalived_interface: "ens160"
+
+# frontend ports
+api_server_frontend_port: 6443
+traefik_frontend_port: 80
+
+# to fulfill loadbalanced nodes
+masters:
+  - ip: "10.10.10.100"
+    hostname: kmaster1
+    port: 6443
+  - ip: "10.10.10.101"
+    hostname: kmaster2
+    port: 6443
+  - ip: "10.10.10.102"
+    hostname: kmaster3
+    port: 6443
+nodes:
+  - ip: "10.10.10.103"
+    hostname: node1
+    port: 30789
+  - ip: "10.10.10.104"
+    hostname: node2
+    port: 30789
+  - ip: "10.10.10.105"
+    hostname: node3
+    port: 30789
+
+# haproxy configuration
+haproxy_username: "haproxy"
+haproxy_groupname: "haproxy"
+haproxy_default_mode: "tcp"
+haproxy_dataplaneapi_user: "dataplaneapi"
+haproxy_frontend_stats_port: "8080"
+haproxy_frontend_stats_username: "admin"
+haproxy_frontend_stats_password: "admin"
+#
+## rct_cluster
+## virtual ip for keepalived
+#ha_vip: "10.33.250.221"
+## interface to plugin on loadbalancers
+#keepalived_interface: "ens160"
+#
+## frontend ports
+#api_server_frontend_port: 6443
+#traefik_frontend_port: 80
+#
+## to fulfill loadbalanced nodes
+#masters:
+#  - ip: "10.33.250.205"
+#    hostname: pp-tvmut1-core2
+#    port: 6443
+#  - ip: "10.33.250.206"
+#    hostname: pp-tvmut1-core3
+#    port: 6443
+#nodes:
+#  - ip: "10.33.250.203"
+#    hostname: dv-tvmut1-tiv7
+#    port: 30841
+#  - ip: "10.33.250.204"
+#    hostname: dv-tvmut1-tiv8
+#    port: 30841
+#
+## haproxy configuration
+#haproxy_username: "haproxy"
+#haproxy_groupname: "haproxy"
+#haproxy_default_mode: "tcp"
+#haproxy_dataplaneapi_user: "dataplaneapi"
+#haproxy_frontend_stats_port: "8080"
+#haproxy_frontend_stats_username: "admin"
+#haproxy_frontend_stats_password: "admin"

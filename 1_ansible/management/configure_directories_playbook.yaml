@@ -1,0 +1,6 @@
+- name: set up directories
+  hosts: nfs_server
+  vars_files:
+    - group_vars/directories.yaml
+  roles:
+    - system-configure-directories

@@ -1,0 +1,10 @@
+= ansible playbooks
+
+__This playbook aims to install all necessary system tools to add a cluster node (master or worker)__
+
+__Please find also a playbook to configure haproxy loadbalancers with keepalived__
+
+CAUTION: Please pay attention to carrefully configure variables, host inventory and templates
+
+
+

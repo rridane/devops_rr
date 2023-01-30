@@ -1,0 +1,42 @@
+nextcloud:
+  namespace: "nextcloud"
+  routes:
+    - name: "to-nextcloud"
+      host: "nextcloud.rr-dev.local"
+      pathPrefix: "/"
+      port: "http"
+      target-service: "nextcloud"
+      middlewares: []
+gaia:
+  namespace: "gaia"
+  routes:
+    - name: "to-gaia"
+      host: gaia.rr-dev.local
+      pathPrefix: "/"
+      port: "80"
+      target-service: "gaia"
+      middlewares: []
+system:
+  namespace: "system"
+  routes:
+    - name: "to-dns"
+      host: "dns.rr-dev.local"
+      pathPrefix: "/"
+      port: "80"
+      target-service: "bind9-svc"
+      middlewares: []
+#monitoring:
+#  namespace: "monitoring"
+#  routes:
+#    - name: "to-grafana"
+#      host: "grafana.rr-dev.local"
+#      pathPrefix: "/"
+#      target-service: "prometheus-grafana"
+#      port: 80
+#      middlewares: []
+#    - name: "to-prometheus"
+#      host: "prometheus.rr-dev.local"
+#      pathPrefix: "/"
+#      target-service: "prometheus-grafana-kube-pr-prometheus"
+#      port: 9090
+#      middlewares: []

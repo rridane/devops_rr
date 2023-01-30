@@ -1,0 +1,4 @@
+zone "rr-dev.local" {
+        type master;
+        file "/etc/bind/db.forward.com";
+};

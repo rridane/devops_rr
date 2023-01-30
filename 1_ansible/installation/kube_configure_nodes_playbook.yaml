@@ -1,0 +1,11 @@
+- name: get join command
+  hosts: kmaster1
+  roles:
+    - kubernetes-get-join-command
+
+- name: Add notes to cluster
+  hosts:
+    - workers
+    - masters
+  roles:
+    - kubernetes-configure-workers

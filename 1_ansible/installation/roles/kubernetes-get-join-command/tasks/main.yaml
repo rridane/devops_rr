@@ -1,0 +1,29 @@
+- name: getting cert-key
+  shell: kubeadm init phase upload-certs --upload-certs
+  register: cert_key_stdout
+  become: yes
+  when: clean_kube is defined
+
+- set_fact:
+    cert_key: "{{ cert_key_stdout['stdout_lines'][2]}}"
+  when: clean_kube is defined
+
+- name: getting join command
+  shell: kubeadm token create --print-join-command
+  register: join_command
+  become: yes
+  when: clean_kube is defined
+
+- name: Setting node join command
+  set_fact:
+    nodes_join_command: '{{ join_command.stdout_lines[0] }}'
+  become: yes
+  when: clean_kube is defined
+
+- name: Setting master join command
+  set_fact:
+    masters_join_command: "{{ join_command.stdout_lines[0] }} --certificate-key={{ cert_key }} --control-plane"
+  when: clean_kube is defined
+
+- debug:
+    msg: "{{ masters_join_command }}"

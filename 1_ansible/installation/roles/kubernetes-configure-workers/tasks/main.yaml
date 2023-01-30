@@ -1,0 +1,16 @@
+- name: Joining to the cluster
+  become: yes
+  shell: "/usr/bin/{{ hostvars['kmaster1']['nodes_join_command'] }}"
+  when: group_names[0] == "workers" and clean_kube is defined
+
+- name: Joining to the cluster
+  become: yes
+  shell: "/usr/bin/{{ hostvars['kmaster1']['masters_join_command'] }} --apiserver-advertise-address={{ ansible_host }}"
+  when: group_names[0] == "masters" and clean_kube is defined and inventory_hostname != "kmaster1"
+
+- name: "restart containerd"
+  service:
+    name: "containerd"
+    state: restarted
+    enabled: yes
+  become: yes

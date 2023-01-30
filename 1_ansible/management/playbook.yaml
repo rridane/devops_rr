@@ -1,0 +1,2 @@
+- import_playbook: configure_directories_playbook.yaml
+  tags: configure_directories

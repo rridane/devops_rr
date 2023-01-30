@@ -1,0 +1,14 @@
+- name: configure nfs_server
+  hosts:
+    - nfs_server
+  vars_files:
+    - group_vars/nfs_server.yaml
+  roles:
+    - system-install-nfs-server
+
+- name: install nfs common packages
+  hosts:
+    - workers
+    - masters
+  roles:
+    - system-install-nfs-commons

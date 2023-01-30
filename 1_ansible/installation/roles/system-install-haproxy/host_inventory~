@@ -1,0 +1,28 @@
+##########################################################################################
+
+[masters]
+pp-tvmut1-core2 ansible_host=10.33.250.205 ansible_connection=ssh ansible_user=cptfps
+pp-tvmut1-core3 ansible_host=10.33.250.206 ansible_connection=ssh ansible_user=cptfps
+
+[workers]
+dv-tvmut1-tiv7 ansible_host=10.33.250.203 ansible_connection=ssh ansible_user=cptfps
+dv-tvmut1-tiv8 ansible_host=10.33.250.204 ansible_connection=ssh ansible_user=cptfps
+
+[loadbalancer_nodes]
+#dv-tvmut1-hap1 ansible_host=10.33.250.201 ansible_connection=ssh ansible_user=cptfps
+#dv-tvmut1-hap2 ansible_host=10.33.250.202 ansible_connection=ssh ansible_user=cptfps
+dv-tvmut1-hap1 ansible_host=172.16.180.129 ansible_connection=ssh ansible_user=rridane ansible_password=rridane
+dv-tvmut1-hap2 ansible_host=172.16.180.130 ansible_connection=ssh ansible_user=rridane ansible_password=rridane
+
+[virtual_ips]
+ha_vip 10.33.250.221
+metallb_vip 10.33.250.222
+
+##########################################################################################
+[preinstalled_masters]
+master_1 ansible_host=10.33.250.125 ansible_connection=ssh ansible_user=cptfps
+
+[preinstalled_workers]
+worker_1 ansible_host=10.33.250.125 ansible_connection=ssh ansible_user=cptfps
+worker_2 ansible_host=10.33.250.125 ansible_connection=ssh ansible_user=cptfps
+

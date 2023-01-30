@@ -1,0 +1,41 @@
+- name: init http_proxy without cntlm
+  hosts:
+    - workers
+    - masters
+    - loadbalancer_nodes
+  vars_files:
+    - group_vars/proxy_vars.yaml
+  vars:
+    http_proxy: "{{ full_proxy }}"
+  roles:
+    - system-configure-proxy
+
+- name: configure cntlm
+  hosts:
+    - workers
+    - masters
+    - loadbalancer_nodes
+  vars_files:
+    - group_vars/proxy_vars.yaml
+  roles:
+    - system-install-cntlm
+
+- name: clear proxy settings
+  hosts:
+    - workers
+    - masters
+    - loadbalancer_nodes
+  roles:
+    - system-remove-proxy
+
+- name: init http_proxy with cntlm
+  hosts:
+    - workers
+    - masters
+    - loadbalancer_nodes
+  vars_files:
+    - group_vars/proxy_vars.yaml
+  roles:
+    - system-configure-proxy
+  vars:
+    http_proxy: "http://127.0.0.1:{{ cntlm_listen }}"

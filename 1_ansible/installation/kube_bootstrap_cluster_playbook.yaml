@@ -1,0 +1,11 @@
+- name: Init cluster
+  hosts: kmaster1
+  vars_files:
+    - group_vars/kube_vars.yaml
+  roles:
+    - kubernetes-bootstrap-cluster
+
+- name: install k9s
+  hosts: kmaster1
+  roles:
+    - system-install-k9s

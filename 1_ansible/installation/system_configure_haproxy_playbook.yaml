@@ -1,0 +1,6 @@
+- name: configure high availability load balancers
+  hosts: loadbalancer_nodes
+  roles:
+    - system-install-haproxy
+  vars_files:
+    - group_vars/haproxy_vars.yaml

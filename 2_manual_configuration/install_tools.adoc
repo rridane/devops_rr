@@ -1,0 +1,60 @@
+# Mise en place du cluster
+
+## Installation de flannel
+
+.On télécharge le binaire depuis les sources flannel et on l'installe dans /opt/bin
+[source, bash]
+wget https://github.com/flannel-io/flannel/releases/download/v0.19.2/flannel-v0.19.2-linux-amd64.tar.gz
+
+[source, bash]
+tar -xzf <flanne...>
+mkdir -p /opt/bin
+mv flanneld /opt/bin
+
+[source, bash]
+kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+
+## Installation de traefik
+
+https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
+
+[source, bash]
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+
+Créer le namespace ingress-controller
+[source, bash]
+kubectl create namespace ingress-controller
+
+[source, bash]
+helm install -n ingress-controller traefik traefik/traefik -f traefik_values.yaml
+
+## Installation de metrics-server
+
+[source, bash]
+wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+Ajouter --kubelet-insecure-tls au deployment en cas d'erreur sur le tls
+
+[source, bash]
+kubectl apply -f components.yaml
+
+## Installation de netxcloud
+
+[source, bash]
+helm upgrade --install nextcloud -n nextcloud --values nextcloud_values.yaml nextcloud/nextcloud
+
+## Installation de bind9
+
+[source, bash]
+voir terraform
+
+## Installtion de harbor
+
+[source, bash]
+helm repo add harbor https://helm.goharbor.io
+
+## Install regcred docker
+
+[source, bash]
+kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>

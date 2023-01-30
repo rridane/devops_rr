@@ -1,0 +1,55 @@
+- name: Install nfs-server
+  become: yes
+  apt:
+    name: nfs-kernel-server
+    state: present
+    update_cache: yes
+
+- name: enabling nfs-server
+  become: yes
+  service:
+    name: nfs-server
+    enabled: true
+
+- name: create data directory if not exists ..
+  become: yes
+  file:
+    path: /mnt/data
+    state: directory
+
+- name: create storage directory if not exists ..
+  become: yes
+  file:
+    path: /mnt/storage
+    state: directory
+
+- name: create data_kube_data directory if not exists ..
+  become: yes
+  file:
+    path: /mnt/data/kube_data
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: 0755
+
+- name: create storage_kube_data directory if not exists ..
+  become: yes
+  file:
+    path: /mnt/storage/kube_data
+    state: directory
+    owner: nobody
+    group: nogroup
+    mode: 0755
+
+- name: add nfs server conf
+  template:
+    src: templates/exports
+    dest: "/etc/exports"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+- name: reload conf
+  shell: exportfs -a
+  become: yes
